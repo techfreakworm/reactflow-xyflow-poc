@@ -1,16 +1,13 @@
 {
   "files": {
-    "main.css": "/reactflow-xyflow-poc/static/css/main.f855e6bc.css",
-    "main.js": "/reactflow-xyflow-poc/static/js/main.92090b02.js",
-    "static/js/488.cea0b9eb.chunk.js": "/reactflow-xyflow-poc/static/js/488.cea0b9eb.chunk.js",
-    "static/media/logo.svg": "/reactflow-xyflow-poc/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "main.css": "/reactflow-xyflow-poc/static/css/main.a2c076b6.css",
+    "main.js": "/reactflow-xyflow-poc/static/js/main.3affe9fb.js",
     "index.html": "/reactflow-xyflow-poc/index.html",
-    "main.f855e6bc.css.map": "/reactflow-xyflow-poc/static/css/main.f855e6bc.css.map",
-    "main.92090b02.js.map": "/reactflow-xyflow-poc/static/js/main.92090b02.js.map",
-    "488.cea0b9eb.chunk.js.map": "/reactflow-xyflow-poc/static/js/488.cea0b9eb.chunk.js.map"
+    "main.a2c076b6.css.map": "/reactflow-xyflow-poc/static/css/main.a2c076b6.css.map",
+    "main.3affe9fb.js.map": "/reactflow-xyflow-poc/static/js/main.3affe9fb.js.map"
   },
   "entrypoints": [
-    "static/css/main.f855e6bc.css",
-    "static/js/main.92090b02.js"
+    "static/css/main.a2c076b6.css",
+    "static/js/main.3affe9fb.js"
   ]
 }
