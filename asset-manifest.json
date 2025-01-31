@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/reactflow-xyflow-poc/static/css/main.a2c076b6.css",
-    "main.js": "/reactflow-xyflow-poc/static/js/main.3affe9fb.js",
+    "main.css": "/reactflow-xyflow-poc/static/css/main.23afd631.css",
+    "main.js": "/reactflow-xyflow-poc/static/js/main.87f5efa3.js",
     "index.html": "/reactflow-xyflow-poc/index.html",
-    "main.a2c076b6.css.map": "/reactflow-xyflow-poc/static/css/main.a2c076b6.css.map",
-    "main.3affe9fb.js.map": "/reactflow-xyflow-poc/static/js/main.3affe9fb.js.map"
+    "main.23afd631.css.map": "/reactflow-xyflow-poc/static/css/main.23afd631.css.map",
+    "main.87f5efa3.js.map": "/reactflow-xyflow-poc/static/js/main.87f5efa3.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2c076b6.css",
-    "static/js/main.3affe9fb.js"
+    "static/css/main.23afd631.css",
+    "static/js/main.87f5efa3.js"
   ]
 }
