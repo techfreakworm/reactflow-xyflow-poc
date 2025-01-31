@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import {
   ReactFlow,
   addEdge,
@@ -94,6 +94,7 @@ function Flow() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
   const [editingNode, setEditingNode] = useState(null);
+  const [clipboardNode, setClipboardNode] = useState(null);
 
   const onNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -135,6 +136,35 @@ function Flow() {
     
     setEditingNode(null);
   };
+
+  // Add keyboard event listeners for copy/paste
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.ctrlKey || event.metaKey) { // Support both Windows/Linux (Ctrl) and Mac (Cmd)
+        const selectedNode = nodes.find(node => node.selected);
+        
+        if (event.key === 'c' && selectedNode) {
+          // Copy
+          setClipboardNode(selectedNode);
+        } else if (event.key === 'v' && clipboardNode) {
+          // Paste
+          const newNode = {
+            ...clipboardNode,
+            id: `node-${Date.now()}`, // Generate unique ID
+            position: {
+              x: clipboardNode.position.x + 100, // Offset position
+              y: clipboardNode.position.y + 100
+            },
+            selected: false
+          };
+          handleAddNode(newNode);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [nodes, clipboardNode]);
 
   return (
     <>
