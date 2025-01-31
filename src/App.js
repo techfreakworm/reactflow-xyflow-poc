@@ -117,15 +117,22 @@ function Flow() {
   };
 
   const handleUpdateNode = (updatedNode) => {
+    // First, remove all edges connected to this node
+    setEdges((eds) => eds.filter(edge => 
+      edge.source !== updatedNode.id && edge.target !== updatedNode.id
+    ));
+
+    // Then update the node
     setNodes((nds) => nds.map((node) => {
       if (node.id === updatedNode.id) {
         return {
-          ...node,              // Preserve existing node properties including position
-          data: updatedNode.data // Only update the data portion
+          ...node,
+          data: updatedNode.data
         };
       }
       return node;
     }));
+    
     setEditingNode(null);
   };
 

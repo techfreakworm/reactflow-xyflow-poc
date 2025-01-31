@@ -4,19 +4,17 @@ import { Handle, Position } from '@xyflow/react';
 const handleStyle = { left: 10 };
 
 function InstructionNode({ id, data, isConnectable, onEdit }) {
-  const handles = [];
-  for(let i = 0; i < data.options.length; i++) {
-    handles.push(
-      <Handle
-        key={data.options[i]}
-        type="source"
-        position={Position.Bottom}
-        id={data.options[i]}
-        style={{ ...handleStyle, left: i * 30 }}
-        isConnectable={isConnectable}
-      />,
-    )
-  }
+  const handles = data.options.map((option, index) => (
+    <Handle
+      key={option}
+      type="source"
+      position={Position.Bottom}
+      id={option}
+      style={{ left: `${(index + 1) * (100 / (data.options.length + 1))}%` }}
+      isConnectable={isConnectable}
+    />
+  ));
+
   const onChange = useCallback((evt) => {
     console.log(evt.target.value);
   }, []);
