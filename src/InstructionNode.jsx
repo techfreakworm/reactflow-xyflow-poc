@@ -3,7 +3,7 @@ import { Handle, Position } from '@xyflow/react';
  
 const handleStyle = { left: 10 };
 
-function InstructionNode({ data, isConnectable }) {
+function InstructionNode({ id, data, isConnectable, onEdit }) {
   const handles = [];
   for(let i = 0; i < data.options.length; i++) {
     handles.push(
@@ -50,6 +50,7 @@ function InstructionNode({ data, isConnectable }) {
         </select>
       </div>
       {handles}
+      <button onClick={() => onEdit({ id, data })}>Edit</button>
     </div>
   );
 }

@@ -9,6 +9,7 @@ import '@xyflow/react/dist/style.css';
  
 import InstructionNode from './InstructionNode';
 import AdderNode from './AdderNode';
+import EditorNode from './EditorNode';
  
 const rfStyle = {
   backgroundColor: '#B8CEFF',
@@ -22,7 +23,21 @@ const actions = [
   "Attendant Assisting",
 ];
 
- 
+const allOptions = [
+  'Working',
+  'Not working',
+  'Payment deducted but gate not open',
+  'Swiped again',
+  'Entered manually',
+  'Used another card',
+  '50',
+  '100',
+  '200',
+  'New Option 1',
+  'New Option 2',
+  'New Option 3',
+];
+
 const initialNodes = [
   {
     id: 'node-1',
@@ -30,9 +45,9 @@ const initialNodes = [
     position: { x: 0, y: -300},
     data: {
       instruction: 'Please ask parker if card is working?',
-       options: ['Working', 'Not working', 'Payment deducted but gate not open'],
-       actions
-      },
+      options: ['Working', 'Not working', 'Payment deducted but gate not open'],
+      actions
+    },
   },
   {
     id: 'node-2',
@@ -78,7 +93,8 @@ const nodeTypes = { instructionNode: InstructionNode };
 function Flow() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
- 
+  const [editingNode, setEditingNode] = useState(null);
+
   const onNodesChange = useCallback(
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
     [setNodes],
@@ -95,7 +111,24 @@ function Flow() {
   const handleAddNode = (newNode) => {
     setNodes((nds) => [...nds, newNode]);
   };
- 
+
+  const handleEditNode = (node) => {
+    setEditingNode(node);
+  };
+
+  const handleUpdateNode = (updatedNode) => {
+    setNodes((nds) => nds.map((node) => {
+      if (node.id === updatedNode.id) {
+        return {
+          ...node,              // Preserve existing node properties including position
+          data: updatedNode.data // Only update the data portion
+        };
+      }
+      return node;
+    }));
+    setEditingNode(null);
+  };
+
   return (
     <>
       <ReactFlow
@@ -104,11 +137,23 @@ function Flow() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        nodeTypes={nodeTypes}
+        nodeTypes={{ instructionNode: (props) => <InstructionNode {...props} onEdit={handleEditNode} /> }}
         fitView
         style={rfStyle}
       />
-      <AdderNode onAddNode={handleAddNode} availableOptions={['Option 1', 'Option 2', 'Option 3']} availableActions={actions} />
+      <AdderNode 
+        onAddNode={handleAddNode} 
+        availableOptions={allOptions} 
+        availableActions={actions} 
+      />
+      {editingNode && (
+        <EditorNode
+          nodeData={editingNode}
+          onUpdateNode={handleUpdateNode}
+          availableOptions={allOptions}
+          availableActions={actions}
+        />
+      )}
     </>
   );
 }
