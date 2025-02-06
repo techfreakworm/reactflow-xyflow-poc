@@ -74,3 +74,11 @@ body {
 .reusable-offerings {
   padding: 20px;
 }
+
+.subflow-node {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: #fff;
+  text-align: center;
+}

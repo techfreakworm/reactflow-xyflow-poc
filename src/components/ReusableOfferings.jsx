@@ -35,34 +35,50 @@ const allOptions = [
 
 const initialNodes = [
   {
+    id: 'group-1',
+    type: 'group',
+    data: { label: null },
+    position: { x: 0, y: 0 },
+    style: {
+      width: 600,
+      height: 400,
+    },
+  },
+  {
     id: 'reusable-1',
     type: 'instructionNode',
-    position: { x: 0, y: 0 },
+    position: { x: 10, y: 10 },
     data: {
       instruction: 'Start of reusable flow',
       options: ['Yes', 'No'],
       actions: ['None']
     },
+    parentId: 'group-1',
+    extent: 'parent',
   },
   {
     id: 'reusable-2',
     type: 'instructionNode',
-    position: { x: -200, y: 100 },
+    position: { x: 10, y: 150 },
     data: {
       instruction: 'Handle Yes path',
       options: ['Continue', 'Stop'],
       actions: ['None']
     },
+    parentId: 'group-1',
+    extent: 'parent',
   },
   {
     id: 'reusable-3',
     type: 'instructionNode',
-    position: { x: 200, y: 100 },
+    position: { x: 10, y: 290 },
     data: {
       instruction: 'Handle No path',
       options: ['Retry', 'Exit'],
       actions: ['None']
     },
+    parentId: 'group-1',
+    extent: 'parent',
   },
 ];
 
@@ -168,7 +184,9 @@ function ReusableOfferings() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        nodeTypes={{ instructionNode: (props) => <InstructionNode {...props} onEdit={handleEditNode} /> }}
+        nodeTypes={{ 
+          instructionNode: (props) => <InstructionNode {...props} onEdit={handleEditNode} />
+        }}
         fitView
         style={{ background: '#B8CEFF' }}
       />
