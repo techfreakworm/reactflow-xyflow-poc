@@ -170,7 +170,7 @@ function Flow() {
 
   return (
     <TabContainer>
-      <div style={{ width: '100vw', height: '100vh' }}>
+      <div className="flow-container">
         <ReactFlow
           nodes={nodes}
           edges={edges}

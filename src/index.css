@@ -51,6 +51,24 @@ body {
 .tab-content {
   flex: 1;
   position: relative;
+  height: calc(100vh - 50px); /* Adjust for tab header height */
+}
+
+.tab-content > div {
+  height: 100%;
+  width: 100%;
+}
+
+.flow-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.reactflow-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 
 .reusable-offerings {
