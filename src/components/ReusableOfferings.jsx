@@ -37,12 +37,20 @@ const initialNodes = [
   {
     id: 'group-1',
     type: 'group',
-    data: { label: null },
+    data: { label: 'Group 1' },
     position: { x: 0, y: 0 },
     style: {
       width: 600,
       height: 400,
     },
+  },
+  {
+    id: 'group-1-label',
+    type: 'default',
+    data: { label: 'Group 1' },
+    position: { x: 10, y: -30 },
+    parentId: 'group-1',
+    extent: 'parent',
   },
   {
     id: 'reusable-1',
@@ -80,6 +88,114 @@ const initialNodes = [
     parentId: 'group-1',
     extent: 'parent',
   },
+  {
+    id: 'group-2',
+    type: 'group',
+    data: { label: 'Group 2' },
+    position: { x: 700, y: 0 },
+    style: {
+      width: 600,
+      height: 400,
+    },
+  },
+  {
+    id: 'group-2-label',
+    type: 'default',
+    data: { label: 'Group 2' },
+    position: { x: 10, y: -30 },
+    parentId: 'group-2',
+    extent: 'parent',
+  },
+  {
+    id: 'reusable-4',
+    type: 'instructionNode',
+    position: { x: 10, y: 10 },
+    data: {
+      instruction: 'Start of reusable flow 2',
+      options: ['Yes', 'No'],
+      actions: ['None']
+    },
+    parentId: 'group-2',
+    extent: 'parent',
+  },
+  {
+    id: 'reusable-5',
+    type: 'instructionNode',
+    position: { x: 10, y: 150 },
+    data: {
+      instruction: 'Handle Yes path 2',
+      options: ['Continue', 'Stop'],
+      actions: ['None']
+    },
+    parentId: 'group-2',
+    extent: 'parent',
+  },
+  {
+    id: 'reusable-6',
+    type: 'instructionNode',
+    position: { x: 10, y: 290 },
+    data: {
+      instruction: 'Handle No path 2',
+      options: ['Retry', 'Exit'],
+      actions: ['None']
+    },
+    parentId: 'group-2',
+    extent: 'parent',
+  },
+  {
+    id: 'group-3',
+    type: 'group',
+    data: { label: 'Group 3' },
+    position: { x: 1400, y: 0 },
+    style: {
+      width: 600,
+      height: 400,
+    },
+  },
+  {
+    id: 'group-3-label',
+    type: 'default',
+    data: { label: 'Group 3' },
+    position: { x: 10, y: -30 },
+    parentId: 'group-3',
+    extent: 'parent',
+  },
+  {
+    id: 'reusable-7',
+    type: 'instructionNode',
+    position: { x: 10, y: 10 },
+    data: {
+      instruction: 'Start of reusable flow 3',
+      options: ['Yes', 'No'],
+      actions: ['None']
+    },
+    parentId: 'group-3',
+    extent: 'parent',
+  },
+  {
+    id: 'reusable-8',
+    type: 'instructionNode',
+    position: { x: 10, y: 150 },
+    data: {
+      instruction: 'Handle Yes path 3',
+      options: ['Continue', 'Stop'],
+      actions: ['None']
+    },
+    parentId: 'group-3',
+    extent: 'parent',
+  },
+  {
+    id: 'reusable-9',
+    type: 'instructionNode',
+    position: { x: 10, y: 290 },
+    data: {
+      instruction: 'Handle No path 3',
+      options: ['Retry', 'Exit'],
+      actions: ['None']
+    },
+    parentId: 'group-3',
+    extent: 'parent',
+  },
 ];
 
 const initialEdges = [
@@ -94,6 +210,34 @@ const initialEdges = [
     id: 'reusable-e2', 
     source: 'reusable-1', 
     target: 'reusable-3', 
+    sourceHandle: 'No',
+    label: 'No'
+  },
+  { 
+    id: 'reusable-e3', 
+    source: 'reusable-4', 
+    target: 'reusable-5', 
+    sourceHandle: 'Yes',
+    label: 'Yes'
+  },
+  { 
+    id: 'reusable-e4', 
+    source: 'reusable-4', 
+    target: 'reusable-6', 
+    sourceHandle: 'No',
+    label: 'No'
+  },
+  { 
+    id: 'reusable-e5', 
+    source: 'reusable-7', 
+    target: 'reusable-8', 
+    sourceHandle: 'Yes',
+    label: 'Yes'
+  },
+  { 
+    id: 'reusable-e6', 
+    source: 'reusable-7', 
+    target: 'reusable-9', 
     sourceHandle: 'No',
     label: 'No'
   },
@@ -207,4 +351,4 @@ function ReusableOfferings() {
   );
 }
 
-export default ReusableOfferings;
+export { ReusableOfferings, initialNodes as groups };

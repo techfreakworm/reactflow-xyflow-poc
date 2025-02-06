@@ -11,7 +11,8 @@ import InstructionNode from './InstructionNode';
 import AdderNode from './AdderNode';
 import EditorNode from './EditorNode';
 import TabContainer from './components/TabContainer';
-import ReusableOfferings from './components/ReusableOfferings';
+import { ReusableOfferings, groups as reusableGroups } from './components/ReusableOfferings';
+import GroupList from './components/GroupList';
 
 const rfStyle = {
   backgroundColor: '#B8CEFF',
@@ -139,6 +140,15 @@ function Flow() {
     setEditingNode(null);
   };
 
+  const handleAddGroup = (group) => {
+    const newGroup = {
+      ...group,
+      id: `group-${Date.now()}`,
+      position: { x: Math.random() * 400, y: Math.random() * 400 },
+    };
+    setNodes((nds) => [...nds, newGroup]);
+  };
+
   // Add keyboard event listeners for copy/paste
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -186,6 +196,7 @@ function Flow() {
           availableOptions={allOptions} 
           availableActions={actions} 
         />
+        <GroupList groups={reusableGroups} onAddGroup={handleAddGroup} />
         {editingNode && (
           <EditorNode
             nodeData={editingNode}
