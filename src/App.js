@@ -6,11 +6,13 @@ import {
   applyNodeChanges,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
- 
+
 import InstructionNode from './InstructionNode';
 import AdderNode from './AdderNode';
 import EditorNode from './EditorNode';
- 
+import TabContainer from './components/TabContainer';
+import ReusableOfferings from './components/ReusableOfferings';
+
 const rfStyle = {
   backgroundColor: '#B8CEFF',
 };
@@ -89,7 +91,7 @@ const initialEdges = [
 // we define the nodeTypes outside of the component to prevent re-renderings
 // you could also use useMemo inside the component
 const nodeTypes = { instructionNode: InstructionNode };
- 
+
 function Flow() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
@@ -167,32 +169,35 @@ function Flow() {
   }, [nodes, clipboardNode]);
 
   return (
-    <>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        nodeTypes={{ instructionNode: (props) => <InstructionNode {...props} onEdit={handleEditNode} /> }}
-        fitView
-        style={rfStyle}
-      />
-      <AdderNode 
-        onAddNode={handleAddNode} 
-        availableOptions={allOptions} 
-        availableActions={actions} 
-      />
-      {editingNode && (
-        <EditorNode
-          nodeData={editingNode}
-          onUpdateNode={handleUpdateNode}
-          availableOptions={allOptions}
-          availableActions={actions}
+    <TabContainer>
+      <div style={{ width: '100vw', height: '100vh' }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          nodeTypes={{ instructionNode: (props) => <InstructionNode {...props} onEdit={handleEditNode} /> }}
+          fitView
+          style={rfStyle}
         />
-      )}
-    </>
+        <AdderNode 
+          onAddNode={handleAddNode} 
+          availableOptions={allOptions} 
+          availableActions={actions} 
+        />
+        {editingNode && (
+          <EditorNode
+            nodeData={editingNode}
+            onUpdateNode={handleUpdateNode}
+            availableOptions={allOptions}
+            availableActions={actions}
+          />
+        )}
+      </div>
+      <ReusableOfferings />
+    </TabContainer>
   );
 }
- 
+
 export default Flow;

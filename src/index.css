@@ -21,3 +21,38 @@ body {
   color: #777;
   font-size: 12px;
 }
+
+.tab-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 2px;
+  background: #f0f0f0;
+  padding: 10px 10px 0;
+}
+
+.tab-buttons button {
+  padding: 10px 20px;
+  border: none;
+  background: #e0e0e0;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+}
+
+.tab-buttons button.active {
+  background: #B8CEFF;
+}
+
+.tab-content {
+  flex: 1;
+  position: relative;
+}
+
+.reusable-offerings {
+  padding: 20px;
+}
