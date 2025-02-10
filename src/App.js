@@ -149,6 +149,61 @@ function Flow() {
     setNodes((nds) => [...nds, newGroup]);
   };
 
+  const handleAddNewGroup = () => {
+    const groupId = `group-${Date.now()}`;
+    const newGroup = {
+      id: groupId,
+      type: 'group',
+      data: { label: `New Group ${Date.now()}` },
+      position: { x: Math.random() * 400, y: Math.random() * 400 },
+      style: {
+        width: 600,
+        height: 400,
+      },
+    };
+
+    const newNodes = [
+      {
+        id: `node-${Date.now()}-1`,
+        type: 'instructionNode',
+        position: { x: 10, y: 10 },
+        data: {
+          instruction: 'New Instruction 1',
+          options: ['Option 1', 'Option 2'],
+          actions: ['None']
+        },
+        parentId: groupId,
+        extent: 'parent',
+      },
+      {
+        id: `node-${Date.now()}-2`,
+        type: 'instructionNode',
+        position: { x: 10, y: 150 },
+        data: {
+          instruction: 'New Instruction 2',
+          options: ['Option 3', 'Option 4'],
+          actions: ['None']
+        },
+        parentId: groupId,
+        extent: 'parent',
+      },
+      {
+        id: `node-${Date.now()}-3`,
+        type: 'instructionNode',
+        position: { x: 10, y: 290 },
+        data: {
+          instruction: 'New Instruction 3',
+          options: ['Option 5', 'Option 6'],
+          actions: ['None']
+        },
+        parentId: groupId,
+        extent: 'parent',
+      },
+    ];
+
+    setNodes((nds) => [...nds, newGroup, ...newNodes]);
+  };
+
   // Add keyboard event listeners for copy/paste
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -197,6 +252,7 @@ function Flow() {
           availableActions={actions} 
         />
         <GroupList groups={reusableGroups} onAddGroup={handleAddGroup} />
+        <button onClick={handleAddNewGroup} style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 1000 }}>Add New Group</button>
         {editingNode && (
           <EditorNode
             nodeData={editingNode}
